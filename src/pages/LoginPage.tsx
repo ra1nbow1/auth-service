@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useAuth } from '@/hooks/useAuth';
-import {useNavigate} from "react-router-dom";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const loginSchema = z.object({
     email: z.string().email('Введите корректный email'),
@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
         },
     });
 
-    const { login } = useAuth();
+    const {login} = useAuth();
     const navigate = useNavigate();
 
 
@@ -41,34 +41,35 @@ const LoginPage: React.FC = () => {
     const isLoading = login.status === 'loading';
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
+        <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
+            <div
+                className="w-full max-w-md p-8 space-y-6 bg-background text-foreground rounded shadow-md border border-border">
                 <h2 className="text-2xl font-bold text-center">Вход в аккаунт</h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                         <FormField
                             control={form.control}
                             name="email"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
                                         <Input placeholder="example@mail.com" {...field} />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )}
                         />
                         <FormField
                             control={form.control}
                             name="password"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel>Пароль</FormLabel>
                                     <FormControl>
                                         <Input type="password" placeholder="Ваш пароль" {...field} />
                                     </FormControl>
-                                    <FormMessage />
+                                    <FormMessage/>
                                 </FormItem>
                             )}
                         />
@@ -78,11 +79,12 @@ const LoginPage: React.FC = () => {
 
                             </p>
                         )}
-                        <Button type="submit" className="w-full" disabled={isLoading}>
+                        <Button type="submit" className="w-full border border-border cursor-pointer"
+                                disabled={isLoading}>
                             {isLoading ? 'Вход...' : 'Войти'}
                         </Button>
-                        <div>
-                            <Link to="/register" className="w-full text-center" >Зарегистрироваться</Link>
+                        <div className="flex justify-end">
+                            <Link to="/register" className="w-full text-center">Зарегистрироваться</Link>
                         </div>
                     </form>
                 </Form>

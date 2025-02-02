@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+
 
 const API_URL = 'https://backend-ashen-seven-22.vercel.app';
+
 
 interface AuthResponse {
     token: string;
@@ -60,5 +62,5 @@ export const useAuth = () => {
         enabled: !!token,
     });
 
-    return { register, login, logout, getProfile, token };
+    return {register, login, logout, getProfile, token};
 };

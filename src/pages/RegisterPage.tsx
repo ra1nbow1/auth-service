@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useAuth } from '@/hooks/useAuth';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const registerSchema = z.object({
     email: z.string().email('Введите корректный email'),
@@ -30,8 +31,7 @@ const RegisterPage: React.FC = () => {
     });
 
 
-
-    const { register } = useAuth();
+    const {register} = useAuth();
 
     const isLoading = register.status === 'loading';
 
@@ -47,8 +47,9 @@ const RegisterPage: React.FC = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
+        <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
+            <div
+                className="w-full max-w-md p-8 space-y-6 rounded shadow-md bg-background text-foreground border border-border">
                 <h2 className="text-2xl font-bold text-center">Регистрация</h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -96,10 +97,11 @@ const RegisterPage: React.FC = () => {
                                 {(register.error as Error).message}
                             </p>
                         )}
-                        <Button type="submit" className="w-full" disabled={isLoading}>
+                        <Button type="submit" className="w-full border border-border cursor-pointer"
+                                disabled={isLoading}>
                             {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
                         </Button>
-                        <div>
+                        <div className="flex justify-end">
                             <Link to="/login" className="w-full text-center">Войти</Link>
                         </div>
                     </form>
