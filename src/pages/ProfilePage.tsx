@@ -3,6 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { Skeleton } from '@/components/ui/skeleton.tsx';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button.tsx';
+import Helmet from 'react-helmet';
 
 
 const ProfilePage: React.FC = () => {
@@ -53,6 +54,9 @@ const ProfilePage: React.FC = () => {
     return (
         <div className="flex items-center justify-center min-h-screen">
             <div className="p-4 w-full max-w-md space-y-4 text-center border border-2 border-gray-200 rounded-lg">
+                <Helmet>
+                    <title>Auth Service • {data.email}</title>
+                </Helmet>
                 <h1 className="text-2xl font-bold mb-4">Профиль пользователя</h1>
                 <div className="mb-4 space-y-2">
                     <p>

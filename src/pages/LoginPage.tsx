@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useAuth } from '@/hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 // Определение схемы валидации с использованием Zod
 const loginSchema = z.object({
@@ -45,8 +46,11 @@ const LoginPage: React.FC = () => {
         <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
             <div
                 className="w-full max-w-md p-8 space-y-6 bg-background text-foreground rounded shadow-md border border-border">
+                <Helmet>
+                    <title>Auth Service • Вход</title>
+                </Helmet>
                 <h2 className="text-2xl font-bold text-center">Вход в аккаунт</h2>
-                <Form {...form}>
+                <Form {... form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                         <FormField
                             control={form.control}
@@ -55,7 +59,7 @@ const LoginPage: React.FC = () => {
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="example@mail.com" {...field} />
+                                        <Input placeholder="example@mail.com" {... field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -68,7 +72,7 @@ const LoginPage: React.FC = () => {
                                 <FormItem>
                                     <FormLabel>Пароль</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder="Ваш пароль" {...field} />
+                                        <Input type="password" placeholder="Ваш пароль" {... field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>

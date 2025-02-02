@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useAuth } from '@/hooks/useAuth';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 // Схема валидации для формы регистрации с использованием Zod
 const registerSchema = z.object({
@@ -52,8 +53,11 @@ const RegisterPage: React.FC = () => {
         <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
             <div
                 className="w-full max-w-md p-8 space-y-6 rounded shadow-md bg-background text-foreground border border-border">
+                <Helmet>
+                    <title>Auth Service • Регистрация</title>
+                </Helmet>
                 <h2 className="text-2xl font-bold text-center">Регистрация</h2>
-                <Form {...form}>
+                <Form {... form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                         <FormField
                             control={form.control}
@@ -62,7 +66,7 @@ const RegisterPage: React.FC = () => {
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="example@mail.com" {...field} />
+                                        <Input placeholder="example@mail.com" {... field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -75,7 +79,7 @@ const RegisterPage: React.FC = () => {
                                 <FormItem>
                                     <FormLabel>Пароль</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder="Ваш пароль" {...field} />
+                                        <Input type="password" placeholder="Ваш пароль" {... field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -88,7 +92,7 @@ const RegisterPage: React.FC = () => {
                                 <FormItem>
                                     <FormLabel>Подтверждение пароля</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder="Повторите пароль" {...field} />
+                                        <Input type="password" placeholder="Повторите пароль" {... field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
