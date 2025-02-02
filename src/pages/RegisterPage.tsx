@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useAuth } from '@/hooks/useAuth';
 import { Link } from 'react-router-dom';
 
-
+// Схема валидации для формы регистрации с использованием Zod
 const registerSchema = z.object({
     email: z.string().email('Введите корректный email'),
     password: z.string().min(6, 'Пароль должен содержать не менее 6 символов'),
@@ -18,11 +18,13 @@ const registerSchema = z.object({
     path: ['confirmPassword'],
 });
 
+// Типизация данных формы на основе схемы валидации
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const RegisterPage: React.FC = () => {
+    // Инициализация формы с начальными значениями и схемой валидации
     const form = useForm<RegisterFormValues>({
-        resolver: zodResolver(registerSchema),
+        resolver: zodResolver(registerSchema), // Подключение схемы валидации через zodResolver
         defaultValues: {
             email: '',
             password: '',
@@ -30,9 +32,9 @@ const RegisterPage: React.FC = () => {
         },
     });
 
-
     const {register} = useAuth();
 
+    // Определение состояния загрузки на основе статуса мутации
     const isLoading = register.status === 'loading';
 
     const onSubmit = async (values: RegisterFormValues) => {
@@ -42,7 +44,7 @@ const RegisterPage: React.FC = () => {
                 password: values.password,
             });
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
 

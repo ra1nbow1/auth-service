@@ -8,12 +8,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useAuth } from '@/hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 
-
+// Определение схемы валидации с использованием Zod
 const loginSchema = z.object({
     email: z.string().email('Введите корректный email'),
     password: z.string().min(6, 'Пароль должен содержать не менее 6 символов'),
 });
 
+// Определение типа данных формы на основе схемы валидации
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 const LoginPage: React.FC = () => {
@@ -25,20 +26,20 @@ const LoginPage: React.FC = () => {
         },
     });
 
-    const {login} = useAuth();
-    const navigate = useNavigate();
+    const {login} = useAuth(); // Получение функции login из кастомного хука useAuth
+    const navigate = useNavigate(); // Хук для  навигации
 
-
+    // Функция обработки отправки формы
     const onSubmit = async (values: LoginFormValues) => {
         try {
             await login.mutateAsync(values);
-            navigate('/profile');
+            navigate('/profile'); // Перенаправление на страницу профиля после успешного входа
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
 
-    const isLoading = login.status === 'loading';
+    const isLoading = login.status === 'loading'; // Определение состояния загрузки
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
@@ -75,8 +76,7 @@ const LoginPage: React.FC = () => {
                         />
                         {login.isError && (
                             <p className="text-red-500 text-center">
-                                {(login.error as any).response.data.code == 'invalid_credentials' ? 'Неверные данные' : (login.error as Error).message}
-
+                                {(login.error as any).response.data.code === 'invalid_credentials' ? 'Неверные данные' : (login.error as Error).message}
                             </p>
                         )}
                         <Button type="submit" className="w-full border border-border cursor-pointer"
